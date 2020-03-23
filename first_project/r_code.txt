@@ -1,0 +1,38 @@
+read.csv('C:\\Users\\User\\Documents\\SQL_climate_data\\goined_table.csv')
+joined_table = read.csv('C:\\Users\\User\\Documents\\SQL_climate_data\\goined_table.csv')
+italy_data = read.csv('C:\\Users\\User\\Documents\\SQL_climate_data\\italy_data.csv')
+milan_data = read.csv('C:\\Users\\User\\Documents\\SQL_climate_data\\milan_data.csv')
+
+global_raw_data <- read.csv('C:\\Users\\User\\Documents\\SQL_climate_data\\global_raw_data.csv')
+milan_raw_data <- read.csv('C:\\Users\\User\\Documents\\SQL_climate_data\\milan_raw_data.csv')
+class(global_raw_data)
+class(milan_raw_data)
+dim(global_raw_data)
+dim(milan_raw_data)
+summary(global_raw_data$avg_temp)
+summary(milan_raw_data$avg_temp)
+mean_global_temp <- mean(global_raw_data$avg_temp)
+mean_milan_temp <- mean(milan_raw_data$avg_temp, na.rm = TRUE)
+median_global_temp <- median(global_raw_data$avg_temp)
+median_milan_temp <- median(milan_raw_data$avg_temp, na.rm = TRUE)
+
+plot(x = milan_raw_data$year, y = milan_raw_data$avg_temp, main = "Milan Temperature", xlab = "Years", ylab = "Degrees in Celcious")
+plot(x = global_raw_data$year, y = global_raw_data$avg_temp, main = "Global Temperature", xlab = "Years", ylab = "Degrees in Celcious")
+graphics.off()
+
+install.packages("forecast")
+library(forecast)
+global_moving_average <- ma(global_raw_data$avg_temp, order = 30, centre = TRUE)
+milan_moving_average <- ma(milan_raw_data$avg_temp, order = 30, centre = TRUE)
+
+plot(x = global_raw_data$year, y = global_moving_average, type = "l", main = "Global Moving Average Temperature", xlab = "Years", ylab = "Degrees in Celcious")
+plot(x = milan_raw_data$year, y = milan_moving_average, type = "l", main = "Milan Moving Average Temperature", xlab = "Years", ylab = "Degrees in Celcious")
+
+
+
+
+
+
+
+
+
